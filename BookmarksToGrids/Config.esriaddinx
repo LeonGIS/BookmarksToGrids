@@ -1,0 +1,20 @@
+﻿<ESRI.Configuration xmlns="http://schemas.esri.com/Desktop/AddIns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>BookmarksToGrids</Name>
+  <AddInID>{206a83ad-054f-447c-a2f1-d88fab1f691d}</AddInID>
+  <Description>Convert bookmarks to polygon features</Description>
+  <Version>1.0</Version>
+  <Image>Images\BookmarksToGrids.png</Image>
+  <Author>lscott</Author>
+  <Company>Dedham GIS</Company>
+  <Date>12/1/2014</Date>
+  <Targets>
+    <Target name="Desktop" version="10.2" />
+  </Targets>
+  <AddIn language="CLR" library="BookmarksToGrids.dll" namespace="BookmarksToGrids">
+    <ArcMap>
+      <Commands>
+        <Button id="Dedham_GIS_BookmarksToGrids_BookmarkToGrid" class="BookmarkToGrid" message="Bookmarks to Grids" caption="Bookmarks To Grid" tip="Bookmarks to Grids" category="Add-In Controls" image="Images\BookmarkToGrid.png" />
+      </Commands>
+    </ArcMap>
+  </AddIn>
+</ESRI.Configuration>
