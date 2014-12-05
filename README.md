@@ -1,7 +1,13 @@
 Bookmarks To Grids
 ================
 
-ArcMap add-in that generates polygon features from bookmarks (very beta)
+This is an ArcMap add-in that generates polygon features from bookmarks.  The grids can then be used to generate a map book using data driven pages.
+
+Map Document Requirements: 
+* Bookmarks (obviously)
+* Defined spatial reference
+
+
 
 
 ![ExampleImage]
