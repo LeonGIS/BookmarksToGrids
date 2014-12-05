@@ -62,6 +62,26 @@ Public Class frmInput
                 Exit Sub
             End If
 
+            '** Check Spatial Reference Exists
+            Dim pSR As ISpatialReference = My.ArcMap.Document.FocusMap.SpatialReference
+            If pSR Is Nothing Then
+                MsgBox("No spatial reference Defined for data frame", MsgBoxStyle.Information, "Bookmarks to Grid")
+                Exit Sub
+            End If
+
+            '** Get Bookmarks
+            Dim pMapBookmarks As IMapBookmarks
+            Dim pMarks As IEnumSpatialBookmark
+            Dim pBookmark As ISpatialBookmark
+            pMapBookmarks = My.ArcMap.Document.FocusMap
+            pMarks = pMapBookmarks.Bookmarks
+            pBookmark = pMarks.Next
+
+            If pBookmark Is Nothing Then
+                MsgBox("No Bookmarks in Map Document", MsgBoxStyle.Information, "Bookmarks to Grid")
+                Exit Sub
+            End If
+
             '** Create Grid Feature Class
             Dim pWS2 As IWorkspace2 = CType(m_WS, IWorkspace2)
             Dim pFC = CreateFeatureClass(pWS2, Nothing, txtFC.Text, Nothing, Nothing, Nothing, "")
@@ -75,37 +95,28 @@ Public Class frmInput
 
             My.ArcMap.Document.FocusMap.AddLayer(pLayer)
 
-
             '** Convert Bookmarks to grid features
             Dim pEditor As IEditor
             Dim pUID As New UID
             pUID.Value = "esriEditor.Editor"
             pEditor = My.ArcMap.Application.FindExtensionByCLSID(pUID)
 
-
             Dim pDS As IDataset
             pDS = pFC
             pEditor.StartEditing(pDS.Workspace)
             pEditor.StartOperation()
 
-            '** Get Bookmarks
-            Dim pMapBookmarks As IMapBookmarks
-            Dim pMarks As IEnumSpatialBookmark
-            Dim pBookmark As ISpatialBookmark
+            '** Iterate through bookmarks
             Dim pAOI As IAOIBookmark
             Dim pEnv As IEnvelope
-            Dim pNewFeat As IFeature
-
             Dim pFeatBuff As IFeatureBuffer = pFC.CreateFeatureBuffer()
             Dim pFeatCursor As IFeatureCursor = pFC.Insert(True)
-
-
-
-
-            pMapBookmarks = My.ArcMap.Document.FocusMap
-            pMarks = pMapBookmarks.Bookmarks
-            pBookmark = pMarks.Next
             Dim intPage As Integer = 1
+
+            pMarks = pMapBookmarks.Bookmarks
+            pMarks.Reset()
+            pBookmark = pMarks.Next
+
 
             Do While Not pBookmark Is Nothing
 
@@ -122,19 +133,19 @@ Public Class frmInput
                     intPage = intPage + 1
 
                 End If
-
-
-
                 pBookmark = pMarks.Next
             Loop
-
-
 
             pEditor.StopOperation("Bookmarks to Grid")
             pEditor.StopEditing(True)
 
            
             '** Release objects
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(pFeatBuff)
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(pFeatCursor)
+            System.Runtime.InteropServices.Marshal.ReleaseComObject(pEditor)
+
+
 
             '** Refresh view
             My.ArcMap.Document.ActiveView.Refresh()
