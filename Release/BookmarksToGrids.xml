@@ -1,0 +1,70 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+BookmarksToGrids
+</name>
+</assembly>
+<members>
+<member name="M:BookmarksToGrids.frmInput.CreateFeatureClass(ESRI.ArcGIS.Geodatabase.IWorkspace2,ESRI.ArcGIS.Geodatabase.IFeatureDataset,System.String,ESRI.ArcGIS.Geodatabase.IFields,ESRI.ArcGIS.esriSystem.UID,ESRI.ArcGIS.esriSystem.UID,System.String)">
+	<summary>Simple helper to create a featureclass in a geodatabase.</summary>
+	<param name="workspace">An IWorkspace2 interface</param>
+	<param name="featureDataset">An IFeatureDataset interface or Nothing</param>
+	<param name="featureClassName">A System.String that contains the name of the feature class to open or create. Example: "states"</param>
+	<param name="fields">An IFields interface</param>
+	<param name="CLSID">A UID value or Nothing. Example "esriGeoDatabase.Feature" or Nothing</param>
+	<param name="CLSEXT">A UID value or Nothing (this is the class extension if you want to reference a class extension when creating the feature class).</param>
+	<param name="strConfigKeyword">An empty System.String or RDBMS table string for ArcSDE. Example: "myTable" or ""</param>
+	<returns>An IFeatureClass interface or a Nothing</returns>
+	<remarks>
+  (1) If a 'featureClassName' already exists in the workspace a reference to that feature class 
+      object will be returned.
+  (2) If an IFeatureDataset is passed in for the 'featureDataset' argument the feature class
+      will be created in the dataset. If a Nothing is passed in for the 'featureDataset'
+      argument the feature class will be created in the workspace.
+  (3) When creating a feature class in a dataset the spatial reference is inherited 
+      from the dataset object.
+  (4) If an IFields interface is supplied for the 'fields' collection it will be used to create the
+      table. If a Nothing value is supplied for the 'fields' collection, a table will be created using 
+      default values in the method.
+  (5) The 'strConfigurationKeyword' parameter allows the application to control the physical layout 
+      for this table in the underlying RDBMS—for example, in the case of an Oracle database, the 
+      configuration keyword controls the tablespace in which the table is created, the initial and 
+     next extents, and other properties. The 'strConfigurationKeywords' for an ArcSDE instance are 
+      set up by the ArcSDE data administrator, the list of available keywords supported by a workspace 
+      may be obtained using the IWorkspaceConfiguration interface. For more information on configuration 
+      keywords, refer to the ArcSDE documentation. When not using an ArcSDE table use an empty 
+      string (ex: "").
+</remarks>
+</member><member name="P:BookmarksToGrids.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:BookmarksToGrids.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:BookmarksToGrids.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="P:BookmarksToGrids.My.ThisAddIn.IDs.BookmarkToGrid">
+	<summary>
+Returns 'Dedham_GIS_BookmarksToGrids_BookmarkToGrid', the id declared for Add-in Button class 'BookmarkToGrid'
+</summary>
+</member><member name="T:BookmarksToGrids.My.ThisAddIn.IDs">
+	<summary>
+A class for looking up Add-in id strings declared in the associated configuration xml file (.esriaddinx).
+</summary>
+</member><member name="T:BookmarksToGrids.My.ThisAddIn">
+	<summary>
+A class for looking up declarative information in the associated configuration xml file (.esriaddinx).
+</summary>
+</member><member name="M:BookmarksToGrids.My.Internal.AddInStartupObject.GetThis">
+	<summary>
+ Expose this instance of Add-in class externally
+ </summary>
+</member>
+</members>
+</doc>
